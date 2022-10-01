@@ -1,6 +1,12 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const sqlite = require("sqlite3");
 const fs = require("node:fs");
 const path = require("node:path");
+
+const db = new sqlite.Database("DATA.DB");
+db.serialize(() => {
+    db.run("CREATE TABLE IF NOT EXISTS users (name TEXT, balance INTEGER)")
+})
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] })
 
