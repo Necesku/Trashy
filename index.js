@@ -5,7 +5,7 @@ const path = require("node:path");
 
 const db = new sqlite.Database("DATA.DB");
 db.serialize(() => {
-    db.run("CREATE TABLE IF NOT EXISTS users (name TEXT, balance INTEGER)")
+    db.run("CREATE TABLE IF NOT EXISTS users (name TEXT, balance INTEGER, guild INTEGER)")
 })
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds] })
