@@ -1,4 +1,4 @@
-const { getBalance } = require("./utils/getBalance");
+const { getBalance } = require("./utils/balanceUtils");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {

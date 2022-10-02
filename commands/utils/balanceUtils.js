@@ -9,10 +9,19 @@ function getBalance(Integration) {
                 sql = db.prepare("INSERT INTO users (name, balance, guild) VALUES (?, ?, ?)");
                 sql.run([Integration.user.username, 0, Integration.guild.id]);
             } else {
-                resolve(row["balance"])
+                resolve(row["balance"]);
             };
         });
     });
 };
 
-module.exports = { getBalance };
+function addBalance(money, Integration) {
+    getBalance(Integration).then(balance => {
+        sql = db.prepare("UPDATE users SET balance=? WHERE name=? AND guild=?");
+        sql.run([balance+money, Integration.user.username, Integration.guild.id], (err) => {
+            if (!err) return true;
+    });
+    })
+}
+
+module.exports = { getBalance, addBalance };
